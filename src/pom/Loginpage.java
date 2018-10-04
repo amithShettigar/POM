@@ -2,62 +2,51 @@ package pom;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class Loginpage {
+	@FindBy(id="loginlink")
+	private WebElement Login;
 	
-	//declaring elements
-	@FindBy(id="login_Layer")
-	private WebElement loginele;
+	@FindBy(id="userHandle")
+	private WebElement emailaddress;
 	
-	@FindBy(name="email")
-	private WebElement usernameele;
+	@FindBy(id="password")
+	private WebElement password;
 	
-	@FindBy(id="pLogin")
-	private WebElement passwordele;
-	
-	@FindBy(xpath="//button[.='Login']")
-	private WebElement loginbtnele;
-	
-	@FindBy(xpath="//div[.='My Naukri']")
-	private WebElement mynaukriele;
-	
-	@FindBy(linkText="Logout")
-	private WebElement logoutele;
+	@FindBy(xpath="//button[@class='btn btn-login']")
+	private WebElement loginbtn;
 	
 	public Loginpage(WebDriver driver)
 	{
-		PageFactory.initElements(driver,this); //initializing the elements
+		PageFactory.initElements(driver, this);
 		
-		//Code to close the child windows
-		 String originalHandle = driver.getWindowHandle();
-		 
-		 for(String handle : driver.getWindowHandles()) {
-		        if (!handle.equals(originalHandle)) {
-		            driver.switchTo().window(handle);
-		            driver.close();
-		        }
-		    }
-
-		    driver.switchTo().window(originalHandle);
 	}
 	
-	//utilizing the elements
-	public void loginmethod(String usernamedata,String passworddata)
+	public void loginlink()
 	{
-		loginele.click();
-		usernameele.sendKeys(usernamedata);
-		passwordele.sendKeys(passworddata);
-		loginbtnele.click();
+		Login.click();
 	}
 	
-	public void logoutmethod(WebDriver driver)
+	
+	public void emailaddtb(String email)
 	{
-		Actions act=new Actions(driver);
-		act.moveToElement(mynaukriele).perform();
-		logoutele.click();
+		emailaddress.sendKeys(email);
+		
 	}
+	
+	public void passwordtb(String pass)
+	{
+		password.sendKeys(pass);
+	}
+	
+	public void loginbutton()
+	{
+		loginbtn.click();
+	}
+		
+	}
+	
 
-}
+
